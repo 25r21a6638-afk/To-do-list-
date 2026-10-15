@@ -1,30 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My To-Do List</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10132a">
+  <title>FocusFlow — To-Do List</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>My To-Do List 📝</h1>
-        <p class="subtitle">Organize your day, one task at a time.</p>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
 
-        <form id="task-form">
-            <input type="text" id="task-input" placeholder="Enter a new task..."
-                   autocomplete="off" required>
-            <button type="submit">Add Task</button>
-        </form>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="FocusFlow home">
+        <span class="brand-mark">✓</span>
+        <span>Focus<span class="brand-light">Flow</span></span>
+      </a>
+      <span class="date-chip" id="todayLabel">Your day, your pace</span>
+    </header>
 
-        <div class="task-info">
-            <span id="task-count">0 tasks remaining</span>
-            <button id="clear-completed" type="button">Clear completed</button>
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+        <h1>Make today <span>count.</span></h1>
+        <p class="welcome-copy">A little progress every day adds up to big results.</p>
+      </div>
+      <div class="welcome-icon" aria-hidden="true">✦</div>
+    </section>
+
+    <section class="stats-grid" aria-label="Task statistics">
+      <article class="stat-card">
+        <span class="stat-icon total-icon">▤</span>
+        <div><p>Total tasks</p><strong id="totalCount">0</strong></div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon done-icon">✓</span>
+        <div><p>Completed</p><strong id="completedCount">0</strong></div>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon pending-icon">◷</span>
+        <div><p>Remaining</p><strong id="remainingCount">0</strong></div>
+      </article>
+    </section>
+
+    <section class="panel progress-panel">
+      <div class="progress-heading">
+        <div>
+          <p class="section-kicker">YOUR PROGRESS</p>
+          <h2>Daily progress</h2>
         </div>
+        <strong id="progressPercent">0%</strong>
+      </div>
+      <div class="progress-track" role="progressbar" aria-label="Task completion progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-note" id="progressNote">Every task you finish is a win. Start with one.</p>
+    </section>
 
-        <ul id="task-list"></ul>
-        <p id="empty-message">No tasks yet. Add your first task!</p>
-    </div>
+    <section class="panel tasks-panel">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">STAY ON TRACK</p>
+          <h2>My tasks</h2>
+        </div>
+        <span class="task-count" id="taskCountLabel">0 tasks</span>
+      </div>
+
+      <form id="taskForm" class="task-form">
+        <label class="sr-only" for="taskInput">Task name</label>
+        <input id="taskInput" type="text" maxlength="120" placeholder="What do you need to get done?" autocomplete="off" required>
+        <label class="sr-only" for="priorityInput">Task priority</label>
+        <select id="priorityInput" aria-label="Task priority">
+          <option value="low">Low priority</option>
+          <option value="medium" selected>Medium priority</option>
+          <option value="high">High priority</option>
+        </select>
+        <button class="add-button" type="submit"><span>＋</span> Add task</button>
+      </form>
+
+      <div class="task-toolbar">
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button class="filter-button active" type="button" data-filter="all">All</button>
+          <button class="filter-button" type="button" data-filter="active">To do</button>
+          <button class="filter-button" type="button" data-filter="completed">Completed</button>
+        </div>
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input type="search" id="searchInput" placeholder="Search tasks..." aria-label="Search tasks">
+        </label>
+      </div>
+
+      <div id="taskList" class="task-list" aria-live="polite"></div>
+      <div id="emptyState" class="empty-state">
+        <div class="empty-illustration">✧</div>
+        <h3>Nothing on your list yet</h3>
+        <p>Add your first task above and make it happen.</p>
+      </div>
+
+      <footer class="task-footer">
+        <span id="footerMessage">Your tasks are saved on this device.</span>
+        <button type="button" id="clearCompleted" class="clear-button">Clear completed</button>
+      </footer>
+    </section>
+
+    <footer class="page-footer">Built for your goals <span>✦</span> One task at a time</footer>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
